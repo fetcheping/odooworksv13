@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <menuitem name="CERAD" id="menu_root" sequence="0"/>
+         <record model="ir.ui.view" id="view_examen_tree">
+            <field name="name">examen.tree</field>
+            <field name="model">labo.examen</field>
+            <field name="arch" type="xml">
+                <tree default_order="date_examen desc">
+                    <field name="name"/>
+                    <field name="patient_id"/>
+                    <field name="date_examen"/>
+                    <field name="prescripteur"/>
+                    <field name="currency_id" groups="base.group_multi_currency"/>
+                    <field name="amount_total" sum="Prix Total" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                </tree>
+            </field>
+        </record>
+
+
+         <!-- code pour rechercher un element-->
+
+        <record model="ir.ui.view" id="examen_form_search">
+           <field name="name">labo_examen</field>
+           <field name="model">labo.examen</field>
+           <field name="arch" type="xml">
+              <search string="Examen">
+                 <field name="name" string="Examen"
+                        filter_domain="['|','|', ('name', 'ilike', self),('prescripteur', 'ilike', self), ('patient_id', 'ilike', self)]"/>
+                   <field name="patient_id" string="patient"
+                        filter_domain="[('patient_id.name', 'ilike', self)]"/>
+
+                  <filter name="Ajourd'hui" domain="[('date_examen','&gt;=',(context_today()).strftime('%Y-%m-%d 00:00:00')),('date_examen','&lt;=',(context_today()).strftime('%Y-%m-%d 23:59:59'))]"/>
+                   <filter name="Ce mois" domain="[('date_examen','&gt;=',(context_today()).strftime('%%Y-%%m-01'))]"/>
+                  <filter name="Le mois dernier" domain="['&amp;',('date_examen','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('date_examen','&lt;=',(context_today()).strftime('%%Y-%%m-01'))]"/>
+                  <!-- <filter name="date d'examen" domain="[('date_examen','!=','')]"/>-->
+                  <separator/>
+                   <filter name="Resultat disponible" domain="[('disponible','=','oui')]"/>
+                   <filter name="Resultat non disponible" domain="[('disponible','=','non')]"/>
+                  <group expand="0" string="Group By">
+                      <filter string="Prescripteur" name="prescripteur" context="{'group_by': 'prescripteur'}"/>
+                      <filter string="patient" name="patient_id" context="{'group_by': 'patient_id'}"/>
+                      <filter string="Date" name="date_examen" domain="[]" context="{'group_by': 'date_examen'}"/>
+                  </group>
+              </search>
+           </field>
+         </record>
+
+
+        <record model="ir.actions.act_window" id="action_examen">
+            <field name="name">examen</field>
+            <field name="res_model">labo.examen</field>
+            <field name="view_mode">tree,form,kanban,list</field>
+            <field name="view_id" ref="view_examen_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> creer votre premier examen</p>
+            </field>
+        </record>
+
+        <menuitem name="examen" id="menu_examen" parent="menu_root" action="action_examen" sequence="1"/>
+
+        <record model="ir.ui.view" id="examen_form">
+           <field name="name">labo_examen</field>
+           <field name="model">labo.examen</field>
+           <field name="arch" type="xml">
+               <form string="Examen">
+                   <sheet>
+                       <div class="oe_title">
+                           <h1>
+                               <field name="name" readlonly="1"/>
+                           </h1>
+                       </div>
+                           <h1>
+                               <field name="patient_id" placeholder="Nom du patient" />
+                           </h1>
+                        <group>
+                            <group>
+                                <field name="prescripteur"/>
+                                <field name="date_examen"/>
+                            </group>
+                            <group>
+                                <field name="avance"/>
+                                <field name="rest_to_pay"/>
+                                <field name="disponible" widget="radio" options="{'horizontal':true}"/>
+                            </group>
+                        </group>
+                       <notebook>
+                           <page string="Examen à effectuer">
+                               <field name="labo_type_examen_lines">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="prix"/>
+                                        </tree>
+                               </field>
+
+                               <group  class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+
+                                    </div>
+                                    <field name="currency_id" groups="base.group_multi_currency"/>
+                                   <field name="amount_total" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                               </group>
+                           </page>
+
+                       </notebook>
+
+                   </sheet>
+
+               </form>
+           </field>
+         </record>
+    </data>
+</odoo>

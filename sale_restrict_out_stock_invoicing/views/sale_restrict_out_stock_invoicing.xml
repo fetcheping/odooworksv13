@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_out_stock_invoicing" model="ir.ui.view">
+        <field name="name">sale.out.stock.invoicing</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+                <button name="button_cancel" position="after">
+                    <button name="verify_stock" string="confirmer" type="object" groups="account.group_account_invoice" class="oe_highlight"/>
+                </button>
+        </field>
+    </record>
+</odoo>

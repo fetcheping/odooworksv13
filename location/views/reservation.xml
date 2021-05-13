@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="reservation_details_form" model="ir.ui.view">
+        <field name="name">Reservation Details</field>
+        <field name="model">reservation.details</field>
+        <field name="arch" type="xml">
+            <form string="reservation Details Form">
+                <!--<header>
+                       <button name="confirm_insurance" string="Confirm" type="object"
+                               states="draft" class="oe_highlight"/>
+                       <field name="state" widget="statusbar"/>
+                </header>-->
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="ref"/>
+                            <field name="client"/>
+                            <field name="chambre_id"/>
+                            <field name="lieu"/>
+                            <field name="price_net"/>
+                            <field name="price"/>
+                            <field name="caution"/>
+                        </group>
+                        <group>
+                            <field name="date_in"/>
+                            <field name="date_out"/>
+                            <field name="period"/>
+                            <field name="price_res"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Charges Fixes">
+                               <field name="reservation_cf_line">
+                                   <tree editable="bottom">
+                                       <field name="name"/>
+                                       <field name="amount"/>
+                                   </tree>
+                               </field>
+                               <group  class="oe_subtotal_footer oe_right">
+                                   <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                   </div>
+                                   <field name="currency_id" groups="base.group_multi_currency"/>
+                                   <field name="amount_total_cf" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                               </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="reservation_details_tree" model="ir.ui.view">
+        <field name="name">Reservation Details</field>
+        <field name="model">reservation.details</field>
+        <field name="arch" type="xml">
+            <tree string="reservation Details Tree">
+                <field name="name" optional="hide"/>
+                <!--<field name="lieu" optional="show"/>-->
+                <field name="client"/>
+                <field name="chambre_id"/>
+                <field name="date_in"/>
+                <field name="date_out"/>
+                <field name="period"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="price" sum="Total" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="price_res" sum="Total remind" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="amount_total_cf" optional="hide" sum="Prix Total CF" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="caution" sum="Total caution" optional="hide" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="price_net"  sum="Total Net" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="state_room" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_reservation_management" model="ir.actions.act_window">
+        <field name="name">Reservation</field>
+        <field name="res_model">reservation.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Vous n'avez encore créé aucune Reservation.
+            </p>
+        </field>
+    </record>
+    <record id="reservation_search_view" model="ir.ui.view">
+       <field name="name">Reservation Search View</field>
+       <field name="model">reservation.details</field>
+       <field name="arch" type="xml">
+           <search string="Search Reservation">
+               <field name="chambre_id"/>
+               <field name="client"/>
+               <field name="state_room"/>
+               <!--<filter string="Date" name="date_start" domain="[('date_start', '=', (context_today() - datetime.timedelta(0)).strftime('%%d-%%m-%%Y'))]"/>-->
+               <!--<filter string="Female" name="female" domain="[('gender','=','female')]"
+                       help="Students with gender as Female"/>
+               <filter string="Others" name="others" domain="[('gender','=','others')]"
+                       help="Students with gender as Others"/>-->
+               <group expand="1" string="Group By">
+                   <filter string="Chambre" name="chambre_id" context="{'group_by':'chambre_id'}"/>
+                   <filter string="Date" name="date_in" context="{'group_by':'date_in'}"/>
+                   <filter string="State" name="state_room" context="{'group_by':'state_room'}"/>
+                   <filter string="Lieu" name="lieu" context="{'group_by':'lieu'}"/>
+               </group>
+           </search>
+       </field>
+    </record>
+</odoo>

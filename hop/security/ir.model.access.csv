@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_labo_patient,access.labo.patient,model_labo_patient,,1,1,1,1
+access_labo_pres,access.labo.pres,model_labo_pres,,1,1,1,1
+access_labo_type_examen,access.labo.type.examen,model_labo_type_examen,,1,1,1,1
+access_labo_examen,access.labo.examen,model_labo_examen,,1,1,1,1
+access_labo_type_examen_line,access.labo.type.examen.line,model_labo_type_examen_line,,1,1,1,1

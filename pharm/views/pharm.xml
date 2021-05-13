@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                    <field name="rayon"/>
+            </xpath>-->
+            <field name="price_unit" position="after">
+                <field name="rayon"/>
+            </field>
+            <field name="product_qty" position="after">
+                    <field name="qte_cmd"/>
+            </field>
+            <field name="rayon" position="after">
+                <field name="ug"/>
+            </field>
+            <field name="date_order" position="after">
+                <field name="bl_total"/>
+            </field>
+        </field>
+    </record>
+</odoo>

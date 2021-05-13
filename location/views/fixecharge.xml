@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="fixe_charge_details_form" model="ir.ui.view">
+        <field name="name">Fixe Charge Details</field>
+        <field name="model">fixe.charge.details</field>
+        <field name="arch" type="xml">
+            <form string="Fixe Charge Details Form">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="prix"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="fixe_charge_details_tree" model="ir.ui.view">
+        <field name="name">Fixe Charge Details</field>
+        <field name="model">fixe.charge.details</field>
+        <field name="arch" type="xml">
+            <tree string="Fixe Details Tree">
+                <field name="name"/>
+                <field name="prix"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_fixe_charge_management" model="ir.actions.act_window">
+        <field name="name">Charges Fixes</field>
+        <field name="res_model">fixe.charge.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Vous n'avez encore créé aucune Charges Fixes.
+            </p>
+        </field>
+    </record>
+</odoo>

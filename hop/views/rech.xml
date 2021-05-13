@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="examen_filtre" model="ir.ui.view">
+        <field name="name">examen.filtr</field>
+        <field name="model">labo.examen</field>
+        <field name="inherit_id" ref="examen_form_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="date_from" filter_domain="[('date_examen','&gt;=',self)]" widget="calendar"/>
+                <field name="date_to" filter_domain="[('date_examen','&gt;=',self)]" widget="calendar"/>
+            </field>
+        </field>
+
+    </record>
+</odoo>

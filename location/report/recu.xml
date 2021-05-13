@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_reservation">
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="doc">
+                 <t t-call="web.external_layout">
+                     <div class="page">
+                         <h4 class="text-center">Reçu De Paiement</h4>
+                         <div class="row mt32 mb32" id="informations">
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Locataire:</strong>
+                                    <p class="m-0" t-field="doc.client"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Date de reservation:</strong>
+                                    <p class="m-0" t-field="doc.create_date"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Date d'entrée:</strong>
+                                    <p class="m-0" t-field="doc.date_in"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Date de sortie prévue:</strong>
+                                    <p class="m-0" t-field="doc.date_out"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Période:</strong>
+                                    <p class="m-0" t-field="doc.period"/>
+                                </div>
+                        </div>
+                         <div class="oe_structure"/>
+                         <div class="row">
+                             <table class="table table-condensed table table-sm o_main_table">
+                                 <thead>
+                                     <tr>
+                                         <th style="text-align:left;" colspan="99"><strong>Description</strong></th>
+                                         <th style="text-align:left;" colspan="99"><strong>Montant</strong></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                         <tr>
+                                             <td style="text-align:left;" colspan="99">
+                                                 <t>
+                                                     <span t-field="doc.chambre"/>
+                                                 </t>
+                                             </td>
+                                              <td style="text-align:left;" colspan="99">
+                                                 <t>
+                                                     <span t-field="doc.price_room"/>
+                                                 </t>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td style="text-align:left;" colspan="99">
+                                                 CAUTION
+                                             </td>
+                                              <td style="text-align:left;" colspan="99">
+                                                 <t>
+                                                     <span t-field="doc.caution"/>
+                                                 </t>
+                                             </td>
+                                         </tr>
+
+                                 </tbody>
+                             </table>
+
+                         </div>
+                     </div>
+                     <div class="col-xs-50">
+                                 <table class="table table-condensed">
+                                     <tr>
+                                         <td style="text-align:right;" colspan="99">
+                                             <strong>Montant A payé:  </strong><span t-field="doc.price_net"/>
+                                         </td>
+                                     </tr>
+
+                                     <tr>
+                                          <td style="text-align:right;" colspan="99">
+                                             <strong>Montant versé:  </strong><span t-field="doc.price"/>
+                                         </td>
+                                     </tr>
+
+                                     <tr>
+                                         <td style="text-align:right;" colspan="99">
+                                             <strong>Reste A payé:  </strong><span t-field="doc.price_res"/>
+                                         </td>
+                                     </tr>
+                                 </table>
+
+                    <script type="text/javascript">
+                    window.print();
+                    </script>
+
+                     </div>
+                 </t>
+             </t>
+        </t>
+    </template>
+</odoo>

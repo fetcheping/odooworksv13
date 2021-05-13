@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report
+            id="report_invoice_css"
+            string="Facture"
+            model="account.move"
+            report_type="qweb-pdf"
+            name="invoice_css.report_invoice_css"
+            file="invoice_css.report_invoice_css"/>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+                id="transaction_main_menu"
+                name="Transaction Management"
+                sequence="75"/>
+
+        <menuitem id="menu_transaction_entry"
+                  name="Transactions"
+                  parent="transaction_main_menu"
+                  action="action_transaction_management"
+                  sequence="1"/>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+                id="guerite_main_menu"
+                name="Pont Bascule"
+                sequence="75"/>
+
+        <menuitem
+                id="configuration_management_menu"
+                name="Configuration"
+                parent="guerite_main_menu"/>
+
+        <menuitem
+                id="customer_management_menu"
+                name="Clients"
+                parent="configuration_management_menu"
+                action="base.action_partner_customer_form"/>
+    </data>
+
+</odoo>

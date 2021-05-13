@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report
+            id="report_examen"
+            string="Reçu de caisse"
+            model="labo.examen"
+            report_type="qweb-pdf"
+            name="hop.report_examen"
+            file="hop.report_examen"/>
+
+
+    <report
+            id="report_bilan"
+            string="Bilan Total"
+            model="labo.examen"
+            report_type="qweb-pdf"
+            name="hop.report_bilan"
+            file="hop.report_bilan"/>
+
+    <report
+            id="report_liste_examen"
+            string="Bilan financier par prescripteur"
+            model="labo.examen"
+            report_type="qweb-pdf"
+            name="hop.report_liste_examen"
+            file="hop.report_liste_examen"/>
+</odoo>

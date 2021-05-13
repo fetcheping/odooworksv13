@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="recherche_form" model="ir.ui.view">
+        <field name="name">recherche.wizard</field>
+        <field name="model">labo.examen</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="prescripteur"/>
+
+                </group>
+                <footer>
+                    <button name="imprimer_rapport" string="Rechercher" type="object" class="oe_highlight"/>
+                    <button  string="annuler" special="cancel" class="btn_secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="recherche_wizard" model="ir.actions.act_window">
+        <field name="name">recherche</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">labo.examen</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="recherche_form"/>
+        <field name="target">new</field>
+
+    </record>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_room_details,access.room.details,model_room_details,base.group_user,1,1,1,1
+access_reservation_details,access.reservation.details,model_reservation_details,base.group_user,1,1,1,1
+access_fixe_charge_details,access.fixe.charge.details,model_fixe_charge_details,base.group_user,1,1,1,1
+access_reservation_cf_lines,access.reservation.cf.lines,model_reservation_cf_lines,base.group_user,1,1,1,1
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template id="layout_invioice" inherit_id="web.external_layout_background">
+        <xpath expr="//div[@class='o_background_header']" position="replace">
+           <div class="o_background_header">
+            <div class="float-right">
+                <h3 class="mt0 text-right" t-field="company.report_header"/>
+            </div>
+            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo"/>
+            <div class="float-right company_address">
+                <div>
+                    <strong t-field="company.partner_id.name"/>
+                </div>
+                <span t-field="company.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+            </div>
+            <div class="clearfix mb8"/>
+            </div>
+        </xpath>
+
+
+
+    </template>
+</odoo>

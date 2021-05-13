@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem name="CERAD" id="menu_root" sequence="0"/>
+
+        <record model="ir.ui.view" id="view_patient_tree">
+            <field name="name">patient.tree</field>
+            <field name="model">labo.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numero"/>
+                    <field name="name"/>
+                     <field name="tel"/>
+                </tree>
+            </field>
+        </record>
+
+         <!-- vue kanban-->
+         <record model="ir.ui.view" id="view_patient_kanban">
+            <field name="name">patient.kanban</field>
+            <field name="model">labo.patient</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="tel"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <t>
+                                <img class="o_kanban_image" alt="avatar" src="/contacts/static/description/icon.png"/>
+                            </t>
+                        <div class="o_kanban_tags_details">
+                            <ul>
+                                <li><field name="name"></field></li>
+                            </ul>
+                        </div>
+                       </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+         <!-- code pour rechercher un element-->
+
+        <record model="ir.ui.view" id="patient_form_search">
+           <field name="name">labo_patient</field>
+           <field name="model">labo.patient</field>
+           <field name="arch" type="xml">
+              <search string="Patient">
+                   <field name="numero" string="Examen"
+                        filter_domain="[('numero', 'ilike', self)]"/>
+                 <field name="name" string="Patient"
+                        filter_domain="['|', ('name', 'ilike', self), ('tel', 'ilike', self)]"/>
+                 <field name="tel" string="Telephone"></field>
+                  <filter name="tel" domain="[('tel','!=','')]"></filter>
+                  <group expand="0" string="Group By">
+                      <filter string="Patient" name="name" context="{'group_by': 'name'}"></filter>
+                      <filter string="Telephone" name="tel" context="{'group_by': 'tel'}"></filter>
+                  </group>
+              </search>
+           </field>
+         </record>
+
+
+   <!-- action qui appelle la vue-->
+        <record model="ir.actions.act_window" id="action_patient">
+            <field name="name">patient</field>
+            <field name="res_model">labo.patient</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_patient_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> creer votre premier patient</p>
+            </field>
+        </record>
+        <menuitem name="patient" id="menu_patient" parent="menu_root" action="action_patient" sequence="2"/>
+
+        <record model="ir.ui.view" id="patient_form">
+           <field name="name">labo_patient</field>
+           <field name="model">labo.patient</field>
+           <field name="arch" type="xml">
+               <form string="Patient">
+                   <sheet>
+                       <div class="oe_title">
+                           <h1>
+                               <field name="numero" readlonly="1"/>
+                           </h1>
+                       </div>
+                       <h1>
+                           <group>
+                           <field name="name" placeholder="Nom et Prénom du patient"/>
+                           </group>
+                       </h1>
+                       <notebook>
+                           <page string="autres informations">
+                               <group>
+                               <field name="tel" widget="char"/>
+                               </group>
+                           </page>
+                       </notebook>
+                   </sheet>
+               </form>
+           </field>
+         </record>
+    </data>
+</odoo>

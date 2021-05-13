@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <!--<report
+            id="report_fiche_examen"
+            string="Fiche d'examen"
+            model="labo.examen"
+            report_type="qweb-pdf"
+            name="hopital.report_examen"
+            file="hopital.report_examen"/>-->
+     <report
+            id="report_ticket"
+            string="Reçu"
+            model="reservation.details"
+            report_type="qweb-pdf"
+            name="location.report_reservation"
+            file="location.report_reservation"/>
+</odoo>

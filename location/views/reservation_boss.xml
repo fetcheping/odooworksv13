@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="reservation_details_boss_tree" model="ir.ui.view">
+        <field name="name">Reservation Details</field>
+        <field name="model">reservation.details</field>
+        <field name="arch" type="xml">
+            <tree string="reservation Details Boss Tree">
+                <field name="name" optional="show"/>
+                <field name="client"/>
+                <field name="chambre_id"/>
+                <field name="period"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="price" sum="Total" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="amount_total_cf" sum="Prix Total CF" widget="Monetary" options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_other_charge_management" model="ir.actions.act_window">
+        <field name="name">Autres</field>
+        <field name="res_model">reservation.details</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Vous n'avez encore créé aucune Reservation.
+            </p>
+        </field>
+    </record>
+    <record id="reservation_search_view" model="ir.ui.view">
+       <field name="name">Reservation Search View</field>
+       <field name="model">reservation.details</field>
+       <field name="arch" type="xml">
+           <search string="Search Reservation">
+               <field name="chambre_id"/>
+               <field name="client"/>
+               <field name="state_room"/>
+               <group expand="1" string="Group By">
+                   <filter string="Chambre" name="chambre_id" context="{'group_by':'chambre_id'}"/>
+                   <filter string="Date" name="date_in" context="{'group_by':'date_in'}"/>
+                   <filter string="State" name="state_room" context="{'group_by':'state_room'}"/>
+                   <filter string="Lieu" name="lieu" context="{'group_by':'lieu'}"/>
+               </group>
+           </search>
+       </field>
+    </record>
+</odoo>

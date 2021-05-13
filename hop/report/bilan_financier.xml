@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_liste_exam">
+        <t t-call="web.html_container">
+                 <t t-call="web.external_layout">
+                     <center><h4 >Bilan Financier</h4><br/></center>
+                     <div class="row mt32 mb32" id="informations">
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Prescripteur:</strong>
+                            <span class="m-0" t-field="docs.prescripteur"/>
+                        </div>
+                     </div>
+                      <div class="oe_structure"/>
+                         <div class="row">
+                             <t t-set="nombre" t-value="0"/>
+                             <table class="table table-condensed table table-sm o_main_table">
+                                 <thead>
+                                     <tr>
+                                         <th style="text-align:left;" colspan="99"><strong>patient</strong></th>
+                                          <th style="text-align:left;" colspan="99"><strong>Date d'examen</strong></th>
+                                         <th style="text-align:left;" colspan="99"><strong>Examens demandées</strong></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                              <tr>
+                                                  <td style="text-align:left;" colspan="99">
+                                                      <t>
+                                                          <span t-field="doc.patient_id"/>
+                                                      </t>
+                                                  </td>
+                                                   <td style="text-align:left;" colspan="99">
+                                                      <t>
+                                                          <span t-field="doc.date_examen"/>
+                                                      </t>
+                                                  </td>
+                                                  <td>
+                                                     <t t-foreach="doc.labo_type_examen_lines" t-as="line">
+                                                         <li style="list-style-type:none;">
+                                                                 <t>
+                                                                     <span t-field="line.name"/>
+                                                                     <t t-set="nombre" t-value="nombre+1"/>
+                                                                 </t>
+                                                         </li>
+                                                      </t>
+                                                  </td>
+                                              </tr>
+                                          </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                             <div class="col-xs-20 pull">
+                                 <table class="table table-condensed">
+                                     <tr class="border-black">
+                                         <td style="text-align:left;" colspan="99">
+                                             <strong>
+                                                 Total <span class="m-0" t-field="docs.prescripteur"/>
+                                            </strong>
+                                         </td>
+                                         <td style="text-align:left;" colspan="99">
+                                            <span t-esc="nombre"/>
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </div>
+                 </t>
+        </t>
+    </template>
+</odoo>

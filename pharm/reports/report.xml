@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report
+            id="report_bon_entree"
+            string="Bon d'entree"
+            model="purchase.order"
+            report_type="qweb-pdf"
+            name="pharm.report_bon_entree"
+            file="pharm.report_bon_entree"/>
+</odoo>
